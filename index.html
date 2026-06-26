@@ -417,7 +417,7 @@
     <div class="cover-eyebrow">Portfolio &nbsp;·&nbsp; 2026</div>
     <div class="cover-name">Joseph<br><em>June-seop</em><br>Choi</div>
     <div class="cover-rule"></div>
-    <div class="cover-tagline">Builder, researcher, and engineer — documenting work across software, hardware, and design.</div>
+    <div class="cover-tagline">Documenting my journey building and innovating across software, hardware, and design.</div>
   </div>
 
   <div class="cover-bottom">
@@ -428,11 +428,11 @@
       </div>
       <div class="cover-meta-item">
         <div class="cover-meta-label">GitHub</div>
-        <div class="cover-meta-value"><a href="#">[ github.com/username ]</a></div>
+        <div class="cover-meta-value"><a href="#">github.com/josephjcho1</a></div>
       </div>
       <div class="cover-meta-item">
         <div class="cover-meta-label">Location</div>
-        <div class="cover-meta-value">Abu Dhabi, UAE</div>
+        <div class="cover-meta-value">West Lafayette, Indiana / Abu Dhabi, UAE</div>
       </div>
     </div>
     <div class="cover-footer-row">
@@ -475,7 +475,7 @@
   <div class="hero-links">
     <a class="hero-link" href="mailto:josephkr325@gmail.com">Contact</a>
     <a class="hero-link" href="#">GitHub ↗</a>
-    <a class="hero-link placeholder" title="Add your LinkedIn URL">LinkedIn ↗ &nbsp;[ add link ]</a>
+    <a class="hero-link" href="https://www.linkedin.com/in/josephjchoi/">LinkedIn ↗ </a>
     <a class="hero-link muted" href="#">View Resume</a>
   </div>
 
@@ -493,33 +493,37 @@
   <div class="section-label">Software · 01</div>
 
   <div class="project-header compact">
-    <div class="project-category">Web App &nbsp;·&nbsp; Peer Matching</div>
+    <div class="project-category">Education &nbsp;·&nbsp; RAG Assistant</div>
     <h2 class="project-title">UniMatch</h2>
-    <div class="project-subtitle">Finding the right people, not just more people.</div>
+    <div class="project-subtitle">Your personalized, private admissions counselor.</div>
     <div class="project-tags">
-      <span class="tag">Matching</span>
-      <span class="tag">Onboarding</span>
-      <span class="tag">[ Stack — e.g. Next.js + Supabase ]</span>
+      <span class="tag">[ Ollama + Jan Nano + LangChain + ChromaDB ]</span>
     </div>
   </div>
 
-  <div class="photo-placeholder hero-img compact">
-    <svg class="photo-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-    <span class="photo-placeholder-label">Hero — onboarding & match view</span>
+  <div class="hero-img compact">
+    <iframe
+      src="https://drive.google.com/file/d/1xEf6MxaixJsJPwzJmHkMiEWyG3m-mAgT/view?usp=sharing"
+      width="100%"
+      height="100%"
+      allow="autoplay"
+      allowfullscreen>
+    </iframe>
   </div>
 
   <div class="editorial">
     <div class="ed-row">
       <div class="ed-label">Problem</div>
-      <div class="ed-content">University students struggle to find peers with aligned goals — the people next to them aren't always the right collaborators.</div>
+      <div class="ed-content">Many students cannot access personalized university admissions advice without paying expensive consulting fees or sacrificing their personal data to online AI platforms..</div>
     </div>
     <div class="ed-row">
       <div class="ed-label">Process</div>
       <div class="ed-content">
         <ul class="ed-list">
-          <li>[N] interviews → two personas: focused builder, exploratory connector.</li>
-          <li>Low-fi wireframes prioritized a 60-second onboarding.</li>
-          <li>Chose weighted-tag matching over ML — explainable beats clever.</li>
+          <li><b>Base model</b>: Jan Nano (locally through Ollama) for its low parameter count and strong performance in agentic workflows (e.g. web search and RAG).</li>
+          <li><b>Web search</b>: Integrated DuckDuckGo Search to prioritize user privacy and avoid unnecessary data collection.</li>
+          <li><b>RAG framework</b>: Built the retrieval pipeline using LangChain and ChromaDB for efficient document retrieval.</li>
+          <li><b>Testing environment</b>: Developed and tested the system in Google Colab for rapid iteration and experimentation.</li>
         </ul>
       </div>
     </div>
@@ -660,67 +664,6 @@
   <div class="page-footer">
     <span>Joseph June-seop Choi &nbsp;·&nbsp; Portfolio 2026</span>
     <span>04</span>
-  </div>
-</div>
-
-<div class="page-divider"></div>
-
-<!-- ═══════════════════════════════ HEROOS ═══════════════════════════════ -->
-<div class="page" id="heroos">
-  <div class="section-label">Software · 04</div>
-
-  <div class="project-header compact">
-    <div class="project-category">Productivity &nbsp;·&nbsp; Mobile / Desktop App</div>
-    <h2 class="project-title">HeroOS</h2>
-    <div class="project-subtitle">One surface for habits, tasks, focus — built like a game worth playing.</div>
-    <div class="project-tags">
-      <span class="tag">Habit Tracker</span>
-      <span class="tag">Task Manager</span>
-      <span class="tag">Pomodoro</span>
-      <span class="tag">Gamification</span>
-      <span class="tag">[ Stack — e.g. React Native ]</span>
-    </div>
-  </div>
-
-  <div class="photo-placeholder hero-img compact">
-    <svg class="photo-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-    <span class="photo-placeholder-label">Hero — dashboard with XP bar</span>
-  </div>
-
-  <div class="editorial">
-    <div class="ed-row">
-      <div class="ed-label">Problem</div>
-      <div class="ed-content">Productive people don't lack apps — they have too many. The switching cost between trackers, timers, and notes kills momentum.</div>
-    </div>
-    <div class="ed-row">
-      <div class="ed-label">Process</div>
-      <div class="ed-content">
-        <ul class="ed-list">
-          <li>Mapped a single XP loop that ties habits, tasks, and focus together.</li>
-          <li>Cut features ruthlessly to keep the home screen one tap deep.</li>
-          <li>Designed the reward curve <strong>before</strong> writing logic — small wins shouldn't equal big ones.</li>
-        </ul>
-      </div>
-    </div>
-    <div class="ed-row">
-      <div class="ed-label">Outcome</div>
-      <div class="ed-content">[X eg. working prototype with habit / task / Pomodoro / notes, used daily by [N] testers.]</div>
-    </div>
-  </div>
-
-  <div class="reflection">
-    <div class="reflection-label">Reflection</div>
-    <div class="reflection-text">[ Italic line — e.g. "The first XP balance was wrong, and motivation broke within a week. Designing the curve first would have saved the rewrite." ]</div>
-  </div>
-
-  <div class="cta-row">
-    <a class="cta-btn primary placeholder">▶ &nbsp; Watch Demo &nbsp;[ add link ]</a>
-    <a class="cta-btn secondary placeholder">View on GitHub &nbsp;[ add link ]</a>
-  </div>
-
-  <div class="page-footer">
-    <span>Joseph June-seop Choi &nbsp;·&nbsp; Portfolio 2026</span>
-    <span>05</span>
   </div>
 </div>
 
