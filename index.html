@@ -563,11 +563,14 @@
     </div>
   </div>
 
-  <div class="photo-placeholder hero-img compact">
-    <svg class="photo-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-    <span class="photo-placeholder-label">Hero — homepage & events page</span>
-  </div>
-
+ <div class="photo-placeholder hero-img compact" style="overflow: hidden;">
+   <img
+     src="images/website.jpg"
+     alt="KSEAU Website"
+     style="width: 100%; height: 100%; object-fit: cover; display: block;"
+   >
+ </div>
+ 
   <div class="editorial">
     <div class="ed-row">
       <div class="ed-label">Problem</div>
@@ -595,7 +598,7 @@
   </div>
 
   <div class="cta-row">
-<a href="https://kseau.org" class="cta-btn secondary">Visit Site&nbsp;</a>
+<a href="https://kseau.org" class="cta-btn secondary">visit site&nbsp;</a>
   </div>
 
   <div class="page-footer">
@@ -615,9 +618,7 @@
     <h2 class="project-title">BookShelf</h2>
     <div class="project-subtitle">Encouraging and incentivizing healthy reading habits.</div>
     <div class="project-tags">
-      <span class="tag">Reading Tracker</span>
-      <span class="tag">Personal Data</span>
-      <span class="tag">[ Stack — e.g. React Native ]</span>
+      <span class="tag">[ tauri + next.js + Replit ]</span>
     </div>
   </div>
 
@@ -671,13 +672,10 @@
 
   <div class="project-header compact">
     <div class="project-category">Underwater Robotics &nbsp;·&nbsp; 2025 MATE ROV Competition</div>
-    <h2 class="project-title">MATE ROV - ACS1</h2>
-    <div class="project-subtitle">An ROV that had to survive saltwater, deadlines, and a five-person team.</div>
+    <h2 class="project-title">MATE ROV</h2>
+    <div class="project-subtitle">A cost effective ROV that focuses on a modular design for easy assembly wherever and whenever.</div>
     <div class="project-tags">
-      <span class="tag">Mechanical</span>
-      <span class="tag">Electrical</span>
-      <span class="tag">Control Systems</span>
-      <span class="tag">[ Add stack — e.g. ROS / Arduino ]</span>
+      <span class="tag">[ Raspberry Pi + ArduSub + QGroundControl ]</span>
     </div>
   </div>
 
@@ -695,32 +693,36 @@
   <div class="editorial">
     <div class="ed-row">
       <div class="ed-label">Problem</div>
-      <div class="ed-content">Build a tethered ROV to complete the MATE mission set — manipulator tasks, navigation, and inspection — within strict size and budget limits.</div>
+      <div class="ed-content">Build a tethered ROV to compete in the 2025 MATE ROV competition hosted in Alexandria, Egypt, within the strict size (&lt;5.5kg) and budget limits (2000AED).</div>
     </div>
     <div class="ed-row">
       <div class="ed-label">Process</div>
       <div class="ed-content">
         <ul class="ed-list">
-          <li>Split into mechanical, electrical, and control subsystems with a shared interface spec.</li>
-          <li>Chose <strong>tether over battery</strong> — reliability and live telemetry beat run-time.</li>
-          <li>Iterated the frame across [N] CAD revisions before machining.</li>
+          <li>Designed and built a lightweight ROV using an acrylic frame reinforced with stainless steel structure for easy disassembly-assembly and strong durability.</li>
+          <li>Engineered a sealed electronics system with gasketed watertight enclosure, epoxy cable penetrations, and regulated 12V power distribution.</li>
+          <li>Developed a 6-thruster propulsion system with Pixhawk + Raspberry Pi control architecture using ArduSub, MAVLink, and QGroundControl.</li>
+          <li>Calibrated buoyancy using calculated ballast to achieve near-neutral stability for precise underwater maneuvering.</li>
+          <li>Validated system through iterative testing (waterproofing, mobility, and full-system diagnostics) while prioritizing cost efficiency and reliability.</li>
+          
         </ul>
       </div>
     </div>
     <div class="ed-row">
       <div class="ed-label">Outcome</div>
-      <div class="ed-content">[X eg. completed [N] of [N] mission tasks at regionals; placed [X]; documented in a [4-page] technical report.]</div>
+      <div class="ed-content">Compiled progress into a coherent 20-page technical report. Although the ROV encountered failure during a deep water retrieval mission, we were awared the 'Team Spirit Award' in recognition of strong collaboration, resilience, and the quality of the technical documentation.</div>
     </div>
   </div>
 
   <div class="reflection">
     <div class="reflection-label">Reflection</div>
-    <div class="reflection-text">[ Italic line — e.g. "Interface contracts between subsystems mattered more than any single subsystem's cleverness." ]</div>
+    <div class="reflection-text">This project taught me how important iteration, testing, and failure analysis are in engineering, and how strong teamwork can still lead to meaningful success even when the final system does not perform as intended.</div>
   </div>
 
   <div class="cta-row">
-    <a class="cta-btn secondary placeholder">Technical Report &nbsp;[ add link ]</a>
-    <a class="cta-btn secondary placeholder">Team Page &nbsp;[ add link ]</a>
+    <a href="https://kseau.org" class="cta-btn secondary">technical document&nbsp;</a>
+    <a href="https://kseau.org" class="cta-btn secondary">company spec sheet&nbsp;</a>
+
   </div>
 
   <div class="page-footer">
