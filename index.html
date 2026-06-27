@@ -407,6 +407,137 @@
     .page { box-shadow: none; opacity: 1; transform: none; page-break-after: always; min-height: 100vh; }
     .page-divider { display: none; }
   }
+  
+  /* ── LEGO PAGE LAYOUTS ── */
+.p1-hero {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  grid-template-rows: 300px 156px;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.p1-hero .img-block.span-rows { grid-row: 1 / 3; }
+
+.p1-strip {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+.p1-strip .img-block { height: 130px; }
+
+.img-block {
+  background: var(--gray-paper);
+  border: 0.5px solid var(--gray-light);
+  position: relative;
+  overflow: hidden;
+}
+.img-block img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.img-block.span-rows { grid-row: 1 / 3; }
+
+.img-caption {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 8px 12px;
+  background: rgba(255,255,255,0.86);
+  border-top: 0.5px solid var(--gray-light);
+}
+.img-caption-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 8px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gray-mid);
+}
+.img-label {
+  position: absolute;
+  top: 10px; left: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 8px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gray-mid);
+  background: rgba(255,255,255,0.84);
+  padding: 3px 7px;
+}
+
+.gallery-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 0.5px solid var(--gray-light);
+}
+.gallery-header-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--black);
+}
+.gallery-header-count {
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gray-mid);
+}
+
+.p2-fullwide { margin-bottom: 8px; }
+.p2-fullwide .img-block { height: 300px; }
+
+.p2-twocol {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.p2-twocol .img-block { height: 200px; }
+
+.p2-threecol {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr 1fr;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+.p2-threecol .img-block { height: 160px; }
+
+.pull-quote {
+  padding: 22px 0 20px;
+  border-top: 0.5px solid var(--gray-light);
+  border-bottom: 0.5px solid var(--gray-light);
+  margin-bottom: 28px;
+  display: flex;
+  gap: 28px;
+  align-items: center;
+}
+.pull-mark {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 72px;
+  font-weight: 300;
+  color: var(--gray-light);
+  line-height: 0.7;
+  flex-shrink: 0;
+  margin-top: -6px;
+}
+.pull-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--black);
+  line-height: 1.55;
+}
+.pull-source {
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gray-mid);
+  margin-top: 10px;
+}
+  
 </style>
 </head>
 <body>
@@ -732,59 +863,133 @@
 
 <div class="page-divider"></div>
 
-<!-- ═══════════════════════════════ LEGO DESIGN ═══════════════════════════════ -->
-<div class="page" id="lego">
-  <div class="section-label">Design · 01</div>
 
-  <div class="project-header compact">
-    <div class="project-category">Physical Design &nbsp;·&nbsp; LEGO Build</div>
-    <h2 class="project-title">LEGO Design</h2>
-    <div class="project-subtitle">Designing for a medium that pushes back.</div>
+
+<!-- ═══════════════════════════════ LEGO DESIGNS — PAGE 1 ═══════════════════════════════ -->
+<div class="page" id="lego-p1">
+  <div class="section-label">Design · 05</div>
+
+  <div class="project-header">
+    <div class="project-category">Physical Design &nbsp;·&nbsp; Brick Architecture</div>
+    <h2 class="project-title">LEGO Designs</h2>
+    <div class="project-subtitle">Exploring scale, proportion, and material constraint.</div>
     <div class="project-tags">
-      <span class="tag">Concept</span>
-      <span class="tag">Iteration</span>
-      <span class="tag">Structural Design</span>
+      <span class="tag">Architecture</span>
+      <span class="tag">Custom MOC</span>
+      <span class="tag">[ Bricklink Studio ]</span>
     </div>
   </div>
 
-  <div class="photo-placeholder hero-img compact">
-    <svg class="photo-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-    <span class="photo-placeholder-label">Hero — finished build photo</span>
-  </div>
-
-  <div class="editorial">
-    <div class="ed-row">
-      <div class="ed-label">Brief</div>
-      <div class="ed-content">[ Brief — e.g. design an original [object/scene] using only [parts constraint], expressing [theme]. ]</div>
+  <!-- Asymmetric hero: tall left + two stacked right -->
+  <div class="p1-hero">
+    <div class="img-block span-rows">
+      <img src="YOUR_IMAGE_1.jpg" alt="LEGO architecture hero">
+      <div class="img-caption"><span class="img-caption-text">Architecture Series — Full Build</span></div>
     </div>
-    <div class="ed-row">
-      <div class="ed-label">Process</div>
-      <div class="ed-content">
-        <ul class="ed-list">
-          <li>Sketched [N] concepts; chose the one with the strongest silhouette.</li>
-          <li>Iterated structurally — early versions collapsed at the [joint].</li>
-          <li>Sourced parts within budget; substituted [part] for a sturdier connection.</li>
-        </ul>
-      </div>
+    <div class="img-block">
+      <img src="YOUR_IMAGE_2.jpg" alt="LEGO facade detail">
+      <div class="img-caption"><span class="img-caption-text">Detail — Modular Facade</span></div>
     </div>
-    <div class="ed-row">
-      <div class="ed-label">Outcome</div>
-      <div class="ed-content">[X eg. finished build photographed in [N] angles; submitted to [contest / community], received [recognition].]</div>
+    <div class="img-block">
+      <img src="YOUR_IMAGE_3.jpg" alt="LEGO bricks">
+      <div class="img-caption"><span class="img-caption-text">Palette — Selected Bricks</span></div>
     </div>
   </div>
 
-  <div class="reflection">
-    <div class="reflection-label">Reflection</div>
-    <div class="reflection-text">[ Italic line — e.g. "Constraints did the design work. My job was to listen to what the bricks refused to do." ]</div>
+  <!-- Three-up strip -->
+  <div class="p1-strip">
+    <div class="img-block">
+      <img src="YOUR_IMAGE_4.jpg" alt="">
+      <span class="img-label">No. 02</span>
+    </div>
+    <div class="img-block">
+      <img src="YOUR_IMAGE_5.jpg" alt="">
+      <span class="img-label">No. 03</span>
+    </div>
+    <div class="img-block">
+      <img src="YOUR_IMAGE_6.jpg" alt="">
+      <span class="img-label">No. 04</span>
+    </div>
+  </div>
+
+  <div class="cta-row">
+    <a class="cta-btn secondary placeholder">View on GitHub &nbsp;[ add link ]</a>
+    <a class="cta-btn placeholder">Bricklink Studio Files &nbsp;[ add link ]</a>
   </div>
 
   <div class="page-footer">
     <span>Joseph June-seop Choi &nbsp;·&nbsp; Portfolio 2026</span>
-    <span>07</span>
+    <span>05</span>
   </div>
 </div>
-
 <div class="page-divider"></div>
+
+<!-- ═══════════════════════════════ LEGO DESIGNS — PAGE 2 ═══════════════════════════════ -->
+<div class="page" id="lego-p2">
+  <div class="section-label">Design · 05 — continued</div>
+
+  <div class="gallery-header">
+    <div class="gallery-header-title">Selected Works, 2023 – 2026</div>
+    <div class="gallery-header-count">6 builds</div>
+  </div>
+
+  <!-- Full-width panorama -->
+  <div class="p2-fullwide">
+    <div class="img-block">
+      <img src="YOUR_IMAGE_7.jpg" alt="LEGO panorama">
+      <div class="img-caption"><span class="img-caption-text">No. 05 — Panorama, full build</span></div>
+    </div>
+  </div>
+
+  <!-- 2:1 wide + narrow -->
+  <div class="p2-twocol">
+    <div class="img-block">
+      <img src="YOUR_IMAGE_8.jpg" alt="">
+      <span class="img-label">No. 06 — Process</span>
+    </div>
+    <div class="img-block">
+      <img src="YOUR_IMAGE_9.jpg" alt="">
+      <span class="img-label">No. 06 — Detail</span>
+    </div>
+  </div>
+
+  <!-- 1:1.6:1 uneven trio -->
+  <div class="p2-threecol">
+    <div class="img-block">
+      <img src="YOUR_IMAGE_10.jpg" alt="">
+      <span class="img-label">No. 07</span>
+    </div>
+    <div class="img-block">
+      <img src="YOUR_IMAGE_11.jpg" alt="">
+      <span class="img-label">No. 07 — Wide</span>
+    </div>
+    <div class="img-block">
+      <img src="YOUR_IMAGE_12.jpg" alt="">
+      <span class="img-label">No. 08</span>
+    </div>
+  </div>
+
+  <!-- Pull quote -->
+  <div class="pull-quote">
+    <div class="pull-mark">"</div>
+    <div>
+      <div class="pull-text">The constraint of the brick is what makes it interesting — every angle is a negotiation between what you imagine and what the grid will allow.</div>
+      <div class="pull-source">Design Note &nbsp;·&nbsp; 2025</div>
+    </div>
+  </div>
+
+  <div class="cta-row">
+    <a class="cta-btn secondary placeholder">View on GitHub &nbsp;[ add link ]</a>
+    <a class="cta-btn placeholder">Bricklink Studio Files &nbsp;[ add link ]</a>
+  </div>
+
+  <div class="page-footer">
+    <span>Joseph June-seop Choi &nbsp;·&nbsp; Portfolio 2026</span>
+    <span>06</span>
+  </div>
+</div>
+<div class="page-divider"></div>
+
 
 <!-- ═══════════════════════════════ CONTENTS / COLOPHON ═══════════════════════════════ -->
 <div class="page">
