@@ -1162,14 +1162,6 @@
   </div>
 </div>
 
-<script>
-  const pages = document.querySelectorAll('.page');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.08 });
-  pages.forEach(p => observer.observe(p));
-</script>
-
 <style>
   /* ── LIGHTBOX ── */
   #lb-overlay {
@@ -1187,10 +1179,8 @@
     cursor: zoom-out;
   }
   #lb-overlay.open { display: flex; animation: lb-in 0.22s ease; }
-  @keyframes lb-in {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-  }
+  @keyframes lb-in { from { opacity: 0; } to { opacity: 1; } }
+
   #lb-img {
     max-width: min(880px, 90vw);
     max-height: 82vh;
@@ -1199,6 +1189,7 @@
     object-fit: contain;
     display: block;
     box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+    cursor: default;
   }
   #lb-caption {
     font-family: 'Inter', sans-serif;
@@ -1207,6 +1198,14 @@
     text-transform: uppercase;
     color: rgba(255,255,255,0.42);
     text-align: center;
+  }
+  #lb-counter {
+    font-family: 'Inter', sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    color: rgba(255,255,255,0.22);
+    text-align: center;
+    margin-top: -10px;
   }
   #lb-close {
     position: fixed;
@@ -1225,10 +1224,37 @@
     gap: 10px;
     padding: 8px 0;
     transition: color 0.18s;
+    z-index: 10001;
   }
   #lb-close:hover { color: #fff; }
-  #lb-close svg { opacity: 0.6; }
-  #lb-close:hover svg { opacity: 1; }
+
+  .lb-arrow {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: rgba(255,255,255,0.35);
+    padding: 24px 20px;
+    transition: color 0.18s;
+    z-index: 10001;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .lb-arrow:hover { color: rgba(255,255,255,0.9); }
+  .lb-arrow span {
+    font-family: 'Inter', sans-serif;
+    font-size: 8px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+  #lb-prev { left: 24px; }
+  #lb-next { right: 24px; }
+  .lb-arrow.hidden { opacity: 0; pointer-events: none; }
+
   #lego-p1 .img-block[data-lb],
   #lego-p2 .img-block[data-lb] { cursor: zoom-in; }
   #lego-p1 .img-block[data-lb]:hover img,
@@ -1245,8 +1271,17 @@
     </svg>
     Close
   </button>
+  <button class="lb-arrow" id="lb-prev" aria-label="Previous image">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="15 18 9 12 15 6"/></svg>
+    <span>Prev</span>
+  </button>
+  <button class="lb-arrow" id="lb-next" aria-label="Next image">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="9 6 15 12 9 18"/></svg>
+    <span>Next</span>
+  </button>
   <img id="lb-img" src="" alt="">
   <div id="lb-caption"></div>
+  <div id="lb-counter"></div>
 </div>
 
 <script>
@@ -1257,16 +1292,54 @@
   }, { threshold: 0.08 });
   pages.forEach(p => observer.observe(p));
 
-  /* ── Lightbox ── */
+  /* ── Lightbox with arrow navigation ── */
   const overlay = document.getElementById('lb-overlay');
   const lbImg   = document.getElementById('lb-img');
   const lbCap   = document.getElementById('lb-caption');
+  const lbCount = document.getElementById('lb-counter');
   const lbClose = document.getElementById('lb-close');
+  const lbPrev  = document.getElementById('lb-prev');
+  const lbNext  = document.getElementById('lb-next');
 
-  function openLightbox(src, caption) {
-    lbImg.src = src;
-    lbImg.alt = caption || '';
-    lbCap.textContent = caption || '';
+  let lbImages = [];
+  let lbIndex  = 0;
+
+  /* Build image list from all LEGO img-blocks that have a real <img> */
+  document.querySelectorAll('#lego-p1 .img-block, #lego-p2 .img-block').forEach(block => {
+    const img = block.querySelector('img');
+    if (!img) return;
+
+    const capEl   = block.querySelector('.img-caption-text') || block.querySelector('.img-label');
+    const caption = capEl ? capEl.textContent.trim() : '';
+    const idx     = lbImages.length;
+    lbImages.push({ src: img.src, caption });
+
+    block.setAttribute('data-lb', '');
+    block.setAttribute('role', 'button');
+    block.setAttribute('tabindex', '0');
+
+    const trigger = () => openLightbox(idx);
+    block.addEventListener('click', trigger);
+    block.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') trigger(); });
+  });
+
+  function updateArrows() {
+    lbPrev.classList.toggle('hidden', lbIndex === 0);
+    lbNext.classList.toggle('hidden', lbIndex === lbImages.length - 1);
+  }
+
+  function showSlide(idx) {
+    lbIndex = idx;
+    const { src, caption } = lbImages[idx];
+    lbImg.src     = src;
+    lbImg.alt     = caption;
+    lbCap.textContent   = caption;
+    lbCount.textContent = `${idx + 1} \u00b7 ${lbImages.length}`;
+    updateArrows();
+  }
+
+  function openLightbox(idx) {
+    showSlide(idx);
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
   }
@@ -1277,27 +1350,17 @@
     setTimeout(() => { lbImg.src = ''; }, 220);
   }
 
-  /* Attach to every img-block in the LEGO pages that has a real <img> */
-  document.querySelectorAll('#lego-p1 .img-block, #lego-p2 .img-block').forEach(block => {
-    const img = block.querySelector('img');
-    if (!img) return;
-
-    const capEl = block.querySelector('.img-caption-text') || block.querySelector('.img-label');
-    const caption = capEl ? capEl.textContent.trim() : '';
-
-    block.setAttribute('data-lb', '');
-    block.setAttribute('role', 'button');
-    block.setAttribute('tabindex', '0');
-
-    const trigger = () => openLightbox(img.src, caption);
-    block.addEventListener('click', trigger);
-    block.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') trigger(); });
-  });
-
-  /* Close on button, backdrop click, or Escape */
   lbClose.addEventListener('click', e => { e.stopPropagation(); closeLightbox(); });
-  overlay.addEventListener('click', e => { if (e.target === overlay || e.target === lbImg) closeLightbox(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+  lbPrev.addEventListener('click',  e => { e.stopPropagation(); if (lbIndex > 0) showSlide(lbIndex - 1); });
+  lbNext.addEventListener('click',  e => { e.stopPropagation(); if (lbIndex < lbImages.length - 1) showSlide(lbIndex + 1); });
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeLightbox(); });
+
+  document.addEventListener('keydown', e => {
+    if (!overlay.classList.contains('open')) return;
+    if (e.key === 'Escape')     closeLightbox();
+    if (e.key === 'ArrowLeft'  && lbIndex > 0)                   showSlide(lbIndex - 1);
+    if (e.key === 'ArrowRight' && lbIndex < lbImages.length - 1) showSlide(lbIndex + 1);
+  });
 </script>
 </body>
 </html>
