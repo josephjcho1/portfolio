@@ -1169,5 +1169,137 @@
   }, { threshold: 0.08 });
   pages.forEach(p => observer.observe(p));
 </script>
+
+<style>
+  /* ── LIGHTBOX ── */
+  #lb-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(13,13,13,0.94);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+    cursor: zoom-out;
+  }
+  #lb-overlay.open { display: flex; animation: lb-in 0.22s ease; }
+  @keyframes lb-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  #lb-img {
+    max-width: min(880px, 90vw);
+    max-height: 82vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+  }
+  #lb-caption {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.42);
+    text-align: center;
+  }
+  #lb-close {
+    position: fixed;
+    top: 28px;
+    right: 36px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: rgba(255,255,255,0.5);
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    transition: color 0.18s;
+  }
+  #lb-close:hover { color: #fff; }
+  #lb-close svg { opacity: 0.6; }
+  #lb-close:hover svg { opacity: 1; }
+
+  #lego-p1 .img-block[data-lb],
+  #lego-p2 .img-block[data-lb] { cursor: zoom-in; }
+  #lego-p1 .img-block[data-lb]:hover img,
+  #lego-p2 .img-block[data-lb]:hover img { transform: scale(1.025); }
+  #lego-p1 .img-block img,
+  #lego-p2 .img-block img { transition: transform 0.35s ease; }
+</style>
+
+<!-- LIGHTBOX OVERLAY -->
+<div id="lb-overlay" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <button id="lb-close" aria-label="Close">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5">
+      <line x1="1" y1="1" x2="13" y2="13"/><line x1="13" y1="1" x2="1" y2="13"/>
+    </svg>
+    Close
+  </button>
+  <img id="lb-img" src="" alt="">
+  <div id="lb-caption"></div>
+</div>
+
+<script>
+  /* ── Page scroll-in ── */
+  const pages = document.querySelectorAll('.page');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  pages.forEach(p => observer.observe(p));
+
+  /* ── Lightbox ── */
+  const overlay = document.getElementById('lb-overlay');
+  const lbImg   = document.getElementById('lb-img');
+  const lbCap   = document.getElementById('lb-caption');
+  const lbClose = document.getElementById('lb-close');
+
+  function openLightbox(src, caption) {
+    lbImg.src = src;
+    lbImg.alt = caption || '';
+    lbCap.textContent = caption || '';
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+    setTimeout(() => { lbImg.src = ''; }, 220);
+  }
+
+  /* Attach to every img-block in the LEGO pages that has a real <img> */
+  document.querySelectorAll('#lego-p1 .img-block, #lego-p2 .img-block').forEach(block => {
+    const img = block.querySelector('img');
+    if (!img) return;
+
+    const capEl = block.querySelector('.img-caption-text') || block.querySelector('.img-label');
+    const caption = capEl ? capEl.textContent.trim() : '';
+
+    block.setAttribute('data-lb', '');
+    block.setAttribute('role', 'button');
+    block.setAttribute('tabindex', '0');
+
+    const trigger = () => openLightbox(img.src, caption);
+    block.addEventListener('click', trigger);
+    block.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') trigger(); });
+  });
+
+  /* Close on button, backdrop click, or Escape */
+  lbClose.addEventListener('click', e => { e.stopPropagation(); closeLightbox(); });
+  overlay.addEventListener('click', e => { if (e.target === overlay || e.target === lbImg) closeLightbox(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+</script>
+
 </body>
 </html>
